@@ -16,8 +16,13 @@ import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+classes = {
+    "Amenity": Amenity,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State,
+    "User": User}
 
 
 class DBStorage:
@@ -74,21 +79,22 @@ class DBStorage:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
-    
+
     def get(self, cls, id):
-        """query on the current database session"""
-        print("db storage")
-        print(classes)
+        """get the the object with an id , with respect to the class
+           return None if it doesn't exist
+        """
         for class_ in classes:
             if cls is classes[class_]:
-                obj = self.__session.query(classes[clss].id == id).first()
-                print("-----")
+                obj = self.__session.query(classes[cls].id == id).first()
                 return obj
-        print("-----")
         return None
 
     def count(self, cls=None):
+        """count the classes of the same type , if cls is none then
+           return the count of all
+        """
         if cls is None:
             return len(self.all())
         else:
-            return len(self.__session.query(classes[clss]).all())        
+            return len(self.__session.query(classes[clss]).all())
