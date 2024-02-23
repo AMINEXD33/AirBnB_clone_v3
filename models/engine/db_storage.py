@@ -17,6 +17,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {
+    "BaseModel": BaseModel,
     "Amenity": Amenity,
     "City": City,
     "Place": Place,

@@ -5,7 +5,13 @@ from models import storage
 from models.base_model import BaseModel
 from flask import jsonify
 from api.v1.views import app_views
-
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 @app_views.route('/status', strict_slashes=False)
 def returnstuff():
@@ -23,5 +29,6 @@ def count():
                'places': Place,
                'reviews': Review}
     for key in classes:
+        print("got in ", classes[key])
         classes[key] = storage.count(classes[key])
     return jsonify(classes)
