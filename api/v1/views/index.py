@@ -15,14 +15,13 @@ def returnstuff():
 
 @app_views.route('/stats', strict_slashes=False)
 def count():
-
     '''Returns a count of all classes'''
     classes = {'states': State,
-             'users': User,
-             'amenities': Amenity,
-             'cities': City,
-             'places': Place,
-             'reviews': Review}
+               'users': User,
+               'amenities': Amenity,
+               'cities': City,
+               'places': Place,
+               'reviews': Review}
     for key in classes:
         classes[key] = storage.count(classes[key])
     return jsonify(classes)
