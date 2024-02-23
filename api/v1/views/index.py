@@ -15,6 +15,7 @@ def returnstuff():
 
 @app_views.route('/stats', strict_slashes=False)
 def stuff():
+<<<<<<< HEAD
     '''Returns a count of all classes'''
     classes = {'states': State,
              'users': User,
@@ -25,3 +26,12 @@ def stuff():
     for key in classes:
         classes[key] = storage.count(classes[key])
     return jsonify(classes)
+=======
+    '''JSON Responses'''
+    todos = {'states': State, 'users': User,
+             'amenities': Amenity, 'cities': City,
+             'places': Place, 'reviews': Review}
+    for key in todos:
+        todos[key] = storage.count(todos[key])
+    return jsonify(todos)
+>>>>>>> refs/remotes/origin/master
