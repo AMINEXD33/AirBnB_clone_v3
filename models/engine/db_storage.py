@@ -87,7 +87,7 @@ class DBStorage:
         """
         for class_ in classes:
             if cls is classes[class_]:
-                obj = self.__session.query(classes[cls].id == id).first()
+                obj = self.__session.query(classes[cls.__name__].id == id).first()
                 return obj
         return None
 
@@ -98,4 +98,4 @@ class DBStorage:
         if cls is None:
             return len(self.all())
         else:
-            return len(self.__session.query(classes[clss]).all())
+            return len(self.__session.query(classes[cls.__name__]).all())
