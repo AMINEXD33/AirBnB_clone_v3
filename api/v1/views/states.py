@@ -24,8 +24,6 @@ def states_get(state_id):
     """ handles GET method  and get a specific object
         by ID
     """
-    if state_id is None:
-        abort(404)
     obj = storage.all(State)
     for element in obj:
         if obj[element].id == state_id:
@@ -37,8 +35,6 @@ def states_get(state_id):
                  strict_slashes=False, methods=["DELETE"])
 def states_delete(state_id):
     """ handles DELETE method """
-    if state_id is None:
-        abort(404)
     obj = storage.all(State)
     for element in obj:
         if obj[element].id == state_id:
