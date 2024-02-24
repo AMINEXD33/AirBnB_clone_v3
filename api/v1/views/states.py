@@ -59,22 +59,23 @@ def state_post():
 @app_views.route('/states/<state_id>', methods=['PUT'])
 def state_put(state_id):
     """ handles PUT method """
-    # see if already exists
-    obj = storage.all(State)
-    for element in obj:
-        if obj[element].id == state_id:
-            storage.delete(obj[element])
-            storage.save()
-            return jsonify({}), 200
+    state = None
+    all_ = storage.all(State)
+    for element in all_:
+        if all_[element].id == state_id:
+            state = all_[element]
+    if state is None:
+        abort(404)
     data = request.get_json()
     if data is None:
         abort(400, "Not a JSON")
-    if state_id is None:
-        abord(404)
+    state_dict = state.to_dict()
     for key, value in data.items():
         ignore_keys = ["id", "created_at", "updated_at"]
         if key not in ignore_keys:
-            obj[element].bm_update(key, value)
-    obj[element].save()
-    obj[element] = obj[element].to_dict()
-    return jsonify(obj[element]), 200
+            state_dict[key] = value
+    storage.delete(state)
+    state = State(**state_dict)
+    state.save()
+    state = state.to_dict()
+    return jsonify(state), 200
