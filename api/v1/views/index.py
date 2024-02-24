@@ -30,6 +30,5 @@ def count():
                'places': Place,
                'reviews': Review}
     for key in classes:
-        print("got in ", classes[key])
         classes[key] = storage.count(classes[key])
     return jsonify(classes)
