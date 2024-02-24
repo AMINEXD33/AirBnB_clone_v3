@@ -57,7 +57,6 @@ def state_post():
     if 'name' not in data:
         abort(400, "Missing name")
     state = State(**data)
-    print(state)
     state.save()
     state = state.to_dict()
     return jsonify(state), 201
