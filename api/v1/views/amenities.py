@@ -63,13 +63,13 @@ def state_post():
     return jsonify(amenity_obj), 201
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'])
-def state_put(state_id):
+@app_views.route('/amenities/<amenity_id>', methods=['PUT'])
+def state_put(amenity_id):
     """ handles PUT method """
     amenity = None
     all_ = storage.all(Amenity)
     for element in all_:
-        if all_[element].id == state_id:
+        if all_[element].id == amenity_id:
             amenity = all_[element]
     if amenity is None:
         abort(404)
