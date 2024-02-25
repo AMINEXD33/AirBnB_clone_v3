@@ -40,7 +40,7 @@ def reviews_all(place_id):
     return jsonify(reviews_all)
 
 
-@app_views.route('/reviews/<review_id>', 
+@app_views.route('/reviews/<review_id>',
                  methods=['GET'], strict_slashes=False)
 def review_get(review_id):
     """ handles GET method """
@@ -51,7 +51,7 @@ def review_get(review_id):
     return jsonify(review)
 
 
-@app_views.route('/reviews/<review_id>', 
+@app_views.route('/reviews/<review_id>',
                  methods=['DELETE'], strict_slashes=False)
 def review_delete(review_id):
     """ handles DELETE method """
@@ -88,7 +88,7 @@ def review_post(place_id):
     return jsonify(review), 201
 
 
-@app_views.route('/reviews/<review_id>', 
+@app_views.route('/reviews/<review_id>',
                  methods=['PUT'], strict_slashes=False)
 def review_put(review_id):
     """ handles PUT method """

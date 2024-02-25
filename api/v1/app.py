@@ -14,7 +14,6 @@ from api.v1.views.places import *
 from api.v1.views.places_reviews import *
 
 
-
 app = Flask(__name__)
 app.register_blueprint(app_views)
 app.url_map.strict_slashes = False
