@@ -7,6 +7,7 @@ from api.v1.views import app_views
 from models.base_model import BaseModel
 from models.place import Place
 
+
 @app_views.route('/places', methods=['GET'], strict_slashes=False)
 def place_all():
     """ returns list of all State objects """
