@@ -13,6 +13,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+
 @app_views.route('/status', strict_slashes=False)
 def returnstuff():
     '''return stuff'''
@@ -29,6 +30,5 @@ def count():
                'places': Place,
                'reviews': Review}
     for key in classes:
-        print("got in ", classes[key])
         classes[key] = storage.count(classes[key])
     return jsonify(classes)
