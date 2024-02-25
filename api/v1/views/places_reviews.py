@@ -29,7 +29,7 @@ def reviews_all(place_id):
     if place is None:
         abort(404)
     reviews_all = []
-    reviews = storage.all("Review").values()
+    reviews = storage.all(Review).values()
     for review in reviews:
         if review.place_id == place_id:
             reviews_all.append(review.to_json())
