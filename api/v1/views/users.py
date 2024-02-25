@@ -5,6 +5,19 @@ from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 
+
+def get_stuff(class_, id):
+    """
+       a function to replace the one in the storage,
+       since it has some kinda bug
+    """
+    all_ = storage.all(class_)
+    for element in all_:
+        if all_[element].id == id:
+            return all_[element]
+    return None
+
+
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_users():
     """
@@ -21,7 +34,7 @@ def get_users():
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def get_user(user_id):
     """ Retrieves an user """
-    user = storage.get(User, user_id)
+    user = get_stuff(User, user_id)
     if not user:
         abort(404)
 
@@ -35,7 +48,7 @@ def delete_user(user_id):
     Deletes a user Object
     """
 
-    user = storage.get(User, user_id)
+    user = get_stuff(User, user_id)
 
     if not user:
         abort(404)
@@ -70,7 +83,7 @@ def put_user(user_id):
     """
     Updates a user
     """
-    user = storage.get(User, user_id)
+    user = get_stuff(User, user_id)
 
     if not user:
         abort(404)

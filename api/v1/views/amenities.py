@@ -82,7 +82,7 @@ def amenity_put(amenity_id):
         if key not in ignore_keys:
             amenity_dict[key] = value
     storage.delete(amenity)
-    amenity = State(**amenity_dict)
+    amenity = Amenity(**amenity_dict)
     amenity.save()
     amenity = amenity.to_dict()
     return jsonify(amenity), 200
