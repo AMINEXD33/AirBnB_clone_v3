@@ -8,10 +8,7 @@ from api.v1.views import app_views
 from api.v1.views.index import *
 from api.v1.views.states import *
 from api.v1.views.cities import *
-<<<<<<< HEAD
-=======
 from api.v1.views.amenities import *
->>>>>>> cf832e2de3146ee26eb42657148339918cc236be
 from api.v1.views.users import *
 
 app = Flask(__name__)
