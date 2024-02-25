@@ -21,7 +21,7 @@ def amenity_all():
 
 @app_views.route('/amenities/<amenity_id>',
                  strict_slashes=False, methods=["GET"])
-def states_get(amenity_id):
+def amenity_get(amenity_id):
     """ handles GET method  and get a specific object
         by ID
     """
@@ -36,7 +36,7 @@ def states_get(amenity_id):
 
 @app_views.route('/amenities/<amenity_id>',
                  strict_slashes=False, methods=["DELETE"])
-def states_delete(amenity_id):
+def amenity_delete(amenity_id):
     """ handles DELETE method """
     if amenity_id is None:
         abort(404)
@@ -50,7 +50,7 @@ def states_delete(amenity_id):
 
 
 @app_views.route('/amenities', strict_slashes=False, methods=['POST'])
-def state_post():
+def amenity_post():
     """ handles POST method """
     data = request.get_json()
     if data is None:
@@ -64,7 +64,7 @@ def state_post():
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'])
-def state_put(amenity_id):
+def amenity_put(amenity_id):
     """ handles PUT method """
     amenity = None
     all_ = storage.all(Amenity)
