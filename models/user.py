@@ -27,12 +27,13 @@ class User(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
+        print("**** HERE 1 *****")
         if (kwargs.get("password")):
-            kwargs["password"] = self.get_me_hashed_md5(kwargs["password"])
+            kwargs["password"] = self.get_me_hashed_md5(kwargs.get("password"))
         super().__init__(*args, **kwargs)
 
-    def get_me_hashed_md5(value):
-        hashed = hashlib.sha256()
-        hashed.update(value.encoded("utf-8"))
-        hashed.hexdigest()
+    def get_me_hashed_md5(self, value):
+        hashed = hashlib.md5()
+        hashed.update(value.encode("utf-8"))
+        hashed = hashed.hexdigest()
         return hashed
