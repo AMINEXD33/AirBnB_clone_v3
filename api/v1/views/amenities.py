@@ -1,6 +1,31 @@
-        if obj[element].id == amenity_id:
-            return jsonify(obj[element].to_dict())
-    abort(404)
+#!/usr/bin/python3
+""" objects that handles all default RestFul API actions for Amenities"""
+from models.amenity import Amenity
+from models import storage
+from api.v1.views import app_views
+from flask import abort, jsonify, make_response, request
+
+@app_views.route('/amenities', methods=['GET'], strict_slashes=False)
+def get_amenities():
+    """
+    Retrieves a list of all amenities
+    """
+    all_amenities = storage.all(Amenity).values()
+    list_amenities = []
+    for amenity in all_amenities:
+        list_amenities.append(amenity.to_dict())
+    return jsonify(list_amenities)
+
+
+@app_views.route('/amenities/<amenity_id>/', methods=['GET'],
+                 strict_slashes=False)
+def get_amenity(amenity_id):
+    """ Retrieves an amenity """
+    amenity = storage.get(Amenity, amenity_id)
+    if not amenity:
+        abort(404)
+
+    return jsonify(amenity.to_dict())
 
 
 @app_views.route('/amenities/<amenity_id>',
