@@ -7,13 +7,26 @@ from api.v1.views import app_views
 from os import environ
 from flask import abort, jsonify, make_response, request
 
+
+def get_stuff(class_, id):
+    """
+       a function to replace the one in the storage,
+       since it has some kinda bug
+    """
+    all_ = storage.all(class_)
+    for element in all_:
+        if all_[element].id == id:
+            return all_[element]
+    return None
+
+
 @app_views.route('places/<place_id>/amenities', methods=['GET'],
                  strict_slashes=False)
 def get_place_amenities(place_id):
     """
     Retrieves the list of all Amenity objects of a Place
     """
-    place = storage.get(Place, place_id)
+    place = get_stuff(Place, place_id)
 
     if not place:
         abort(404)
@@ -21,10 +34,11 @@ def get_place_amenities(place_id):
     if environ.get('HBNB_TYPE_STORAGE') == "db":
         amenities = [amenity.to_dict() for amenity in place.amenities]
     else:
-        amenities = [storage.get(Amenity, amenity_id).to_dict()
+        amenities = [get_stuff(Amenity, amenity_id).to_dict()
                      for amenity_id in place.amenity_ids]
 
     return jsonify(amenities)
+
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
                  methods=['DELETE'], strict_slashes=False)
@@ -32,12 +46,12 @@ def delete_place_amenity(place_id, amenity_id):
     """
     Deletes a Amenity object of a Place
     """
-    place = storage.get(Place, place_id)
+    place = get_stuff(Place, place_id)
 
     if not place:
         abort(404)
 
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = get_stuff(Amenity, amenity_id)
 
     if not amenity:
         abort(404)
@@ -61,12 +75,12 @@ def post_place_amenity(place_id, amenity_id):
     """
     Link a Amenity object to a Place
     """
-    place = storage.get(Place, place_id)
+    place = get_stuff(Place, place_id)
 
     if not place:
         abort(404)
 
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = get_stuff(Amenity, amenity_id)
 
     if not amenity:
         abort(404)
