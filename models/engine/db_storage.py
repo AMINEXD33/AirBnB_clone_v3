@@ -87,7 +87,8 @@ class DBStorage:
         """
         for class_ in classes:
             if cls is classes[class_]:
-                obj = self.__session.query(classes[cls.__name__].id == id).first()
+                obj = self.__session.query
+                (classes[cls.__name__].id == id).first()
                 return obj
         return None
 
